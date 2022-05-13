@@ -11,7 +11,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     remove: () => dispatch(removeItem(ownProps.uuid)),
     updatePrice: (price) => dispatch(updatePrice(price, ownProps.uuid)),
     updateQuantity: (quantity) =>
-      dispatch(updateQuantity(quantity, ownProps.uuid))
+      dispatch(updateQuantity(quantity, ownProps.uuid)),
+    total: ownProps.price * ownProps.quantity
   };
 };
 
