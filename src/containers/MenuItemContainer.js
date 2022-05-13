@@ -5,15 +5,22 @@ import {
   updateQuantity,
   updatePrice
 } from '../store/items/actions';
+import { selectItemTotal } from '../store/items/selector';
+
+const mapStateToProps = (state, props) => ({
+  total: selectItemTotal(state, props)
+});
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     remove: () => dispatch(removeItem(ownProps.uuid)),
     updatePrice: (price) => dispatch(updatePrice(price, ownProps.uuid)),
     updateQuantity: (quantity) =>
-      dispatch(updateQuantity(quantity, ownProps.uuid)),
-    total: ownProps.price * ownProps.quantity
+      dispatch(updateQuantity(quantity, ownProps.uuid))
   };
 };
 
-export const MenuItemContainer = connect(null, mapDispatchToProps)(MenuItem);
+export const MenuItemContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(MenuItem);
